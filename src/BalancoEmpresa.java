@@ -8,7 +8,7 @@ public class BalancoEmpresa {
     Divida divida = new Divida();
     divida.setTotal(valor);
     divida.setCredor(credor);
-    divida.setCnpjCredor(cnpjCredor);
+    divida.setCnpjCredor(new Cnpj(cnpjCredor));
     dividas.put(cnpjCredor, divida);
   }
 

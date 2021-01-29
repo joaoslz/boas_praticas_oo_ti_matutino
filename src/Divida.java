@@ -1,52 +1,37 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Divida {
   private double total;
-  private double valorPago;
   private String credor;
-  private String cnpjCredor;
+  private Cnpj cnpjCredor;
 
-  private ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
+  private Pagamentos pagamentos = new Pagamentos();
 
+  public Cnpj getCnpjCredor() {
+    return this.cnpjCredor;
+  }
+  public String getCredor() {
+    return this.credor;
+  }
   public double getTotal() {
     return this.total;
   }
-  public void setTotal(double total) {
-    this.total = total;
-  }
-  public double getValorPago() {
-    return this.valorPago;
-  }
-
-  /*public void setValorPago(double valorPago) {
-    this.valorPago = valorPago;
-  }*/
-  public String getCredor() {
-    return this.credor;
+  public void setCnpjCredor(Cnpj cnpjCredor) {
+    this.cnpjCredor = cnpjCredor;
   }
   public void setCredor(String credor) {
     this.credor = credor;
   }
-  public String getCnpjCredor() {
-    return this.cnpjCredor;
+  public void setTotal(double total) {
+    this.total = total;
   }
-  public void setCnpjCredor(String cnpjCredor) {
-    this.cnpjCredor = cnpjCredor;
-  }
-
-  private void paga(double valor) {
-    if (valor > 100) {
-      valor = valor - 8;
-    }
-    this.valorPago = this.valorPago + valor;
-  }
-
-  public ArrayList<Pagamento> getPagamentos() {
-    return pagamentos;
+  public double valorAPagar() {
+    return this.total - pagamentos.getValorPago();
   }
 
   public void registra(Pagamento pagamento) {
-    this.pagamentos.add(pagamento );
-    this.paga(pagamento.getValor() );
+    pagamentos.registra(pagamento);
   }
 }
+
