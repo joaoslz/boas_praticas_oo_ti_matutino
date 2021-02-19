@@ -1,15 +1,21 @@
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Pagamentos {
 
     private double valorPago;
 
-    private ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
+    private List<Pagamento> pagamentos = new ArrayList<Pagamento>();
+
+    public Iterable<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
 
     public double getValorPago() {
         return this.valorPago;
     }
+
     private void paga(double valor) {
         if (valor < 0) {
             throw new IllegalArgumentException("Valor invalido para pagamento");
@@ -25,7 +31,7 @@ public class Pagamentos {
         paga(pagamento.getValor());
     }
 
-    public ArrayList<Pagamento> pagamentosAntesDe(Calendar data) {
+     public Iterable<Pagamento> pagamentosAntesDe(Calendar data) {
         ArrayList<Pagamento> pagamentosFiltrados = new ArrayList<Pagamento>();
         for (Pagamento pagamento : this.pagamentos) {
             if (pagamento.getData().before(data)) {
@@ -34,7 +40,7 @@ public class Pagamentos {
         }
         return pagamentosFiltrados;
     }
-    public ArrayList<Pagamento> pagamentosComValorMaiorQue(double valorMinimo) {
+    public Iterable<Pagamento> pagamentosComValorMaiorQue(double valorMinimo) {
         ArrayList<Pagamento> pagamentosFiltrados = new ArrayList<Pagamento>();
         for (Pagamento pagamento : this.pagamentos) {
             if (pagamento.getValor() > valorMinimo) {
@@ -43,7 +49,7 @@ public class Pagamentos {
         }
         return pagamentosFiltrados;
     }
-    public ArrayList<Pagamento> pagamentosDo(String cnpjPagador) {
+    public Iterable<Pagamento> pagamentosDo(String cnpjPagador) {
         ArrayList<Pagamento> pagamentosFiltrados = new ArrayList<Pagamento>();
         for (Pagamento pagamento : this.pagamentos) {
             if (pagamento.getCnpjPagador().equals(cnpjPagador)) {
@@ -52,9 +58,5 @@ public class Pagamentos {
         }
         return pagamentosFiltrados;
     }
-
-
-
-
 
 }
